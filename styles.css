@@ -3,6 +3,9 @@ table.MainTable{
     max-width: 1800px;
 }
 
+table.MainTable * {
+	white-space: normal !important;
+}
 
 
 /* Set dimensions on table headers */
