@@ -30,7 +30,7 @@ if(table != null){
     	var textEl = hourCells[i].getElementsByTagName("div")[0],
     		text = textEl.innerText;
 
-    	if (text !== "0,00") {
+    	if (text !== "0,00" && text !== "0.00") {
     		textEl.className += " custom-nonzero-hours";
     	} else {
     		textEl.className += " custom-zero-hours";
