@@ -1,4 +1,4 @@
-var table = document.getElementById("b_s89_g89s90")
+const table = document.querySelector('table[id*="b_s89_g89s90"]')
 if(table != null){
     var rows = table.querySelectorAll("tbody > tr.ListItem td:nth-child(5), tbody > tr.AltListItem td:nth-child(5)")
     for(var i = 0; i < rows.length; i++){
@@ -23,7 +23,6 @@ if(table != null){
         tableCell.appendChild(titleDiv);
     }
 
-
     var hourCells = table.querySelectorAll("td[onClick*='PostBack'][onClick*='reg_value'], .GridCell.SumColumn");
 
     for (var i = 0; i < hourCells.length; i++) {
@@ -37,4 +36,80 @@ if(table != null){
     	}
     }
 
+    function hideColumn(type) {
+        // Hide table head column
+        table.querySelector(`th[title*="${type}"]`).style.display = "none";
+        
+        // Get table cells and sum column
+        let cells = [];
+        let sumCell;
+        
+        switch(type) {
+            case "Zoom":
+                table.classList.add('custom-zoom-field-hidden')
+                sumCell = table.querySelector('tr[id*="__sumRow"] td:nth-child(3)')
+                cells = Array
+                    .from(table.querySelectorAll(`div[onclick*="action:${type}"]`))
+                    .map(node => node.parentElement.parentElement);
+                break;
+            
+            case "Time code":
+                sumCell = table.querySelector('td[id*="__sumRow_timecode"]')
+                cells = table.querySelectorAll(`td[onclick*="timecode"]`);
+                break;
+
+            case "Time unit":
+                sumCell = table.querySelector('td[id*="__sumRow_reg_unit"]')
+                cells = table.querySelectorAll(`td[onclick*="reg_unit"]`);
+                break;
+
+            default:
+                sumCell = table.querySelector(`td[id*="__sumRow_${type.toLowerCase()}"]`);
+                cells = table.querySelectorAll(`td[onclick*="${type.toLowerCase()}"]`);
+                break;
+                
+        }
+
+        // Hide table cells
+        for(let i = 0; i < cells.length; i++) {
+            cells[i].style.display = "none";
+        }
+
+        // Hide the sum cell
+        if(sumCell) {
+            sumCell.style.display = "none";
+        }
+
+        // Decrement button row colspan
+        table.querySelector('tr[id*="_buttons"] td').colSpan -= 1;
+    }
+
+    // Get stored options
+    chrome.storage.sync.get({
+        hideCells: {}
+    }, function(items) {
+        if(items.hideCells) {
+            let colSpan = 0;
+
+            for(let cell in items.hideCells) {
+                if(items.hideCells[cell]) {
+                    hideColumn(cell)
+                }
+            }
+        }
+    });
+}
+
+// Login Enchancements
+if(document.querySelector('form.Login')) {
+    chrome.storage.sync.get({
+        client: ''
+    }, function(items) {
+        if(items.client) {
+            const input = document.querySelector('input[placeholder=Client]')
+            input.value = items.client
+            input.type = "hidden"
+            input.parentElement.parentElement.style.display = "none"
+        }
+    });
 }

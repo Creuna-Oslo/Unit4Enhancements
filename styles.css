@@ -7,7 +7,6 @@ table.MainTable * {
 	white-space: normal !important;
 }
 
-
 /* Set dimensions on table headers */
 .gridCell[id*="headerreg_value"],
 .gridCell[id*="headerreg_unit"],
@@ -24,15 +23,11 @@ table.MainTable * {
 	width: auto !important;
 }
 
-
-
 /* Hide original work order item */
 tr.ListItem td:nth-child(5) > div:first-child,
 tr.AltListItem td:nth-child(5) > div:first-child {
 	display: none;
 }
-
-
 
 /* Format custom work order text */
 .custom-project-name {
@@ -43,8 +38,6 @@ tr.AltListItem td:nth-child(5) > div:first-child {
 	font-weight: bold;
 }
 
-
-
 /* Style hour cells with zero registered hours */
 .custom-nonzero-hours {
 	font-weight: bold;
@@ -53,9 +46,6 @@ tr.AltListItem td:nth-child(5) > div:first-child {
 .custom-zero-hours {
 	opacity: 0.5;
 }
-
-
-
 
 /* Format sum cols and rows */
 .LastVisibleHeaderCell,
@@ -70,9 +60,13 @@ tr.AltListItem td:nth-child(5) > div:first-child {
 	border-top: 1px solid black !important;
 }
 
-
-
 /* Make green backgrounds (for holidays and weekends) red instead of green */
 .GridCell[style*="background-color"][style*="#00ff00"] {
 	background-color: #ffe0e0 !important;
+}
+
+/* Add padding to td rows when zoom column is hidden or it looks nasty */
+table.custom-zoom-field-hidden tr.ListItem td.GridCell,
+table.custom-zoom-field-hidden tr.AltListItem td.GridCell {
+	padding: 6px 10px;
 }
