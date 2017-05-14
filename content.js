@@ -1,4 +1,4 @@
-const table = document.querySelector('table[id*="b_s89_g89s90"]')
+var table = document.getElementById("b_s89_g89s90")
 if(table != null){
     var rows = table.querySelectorAll("tbody > tr.ListItem td:nth-child(5), tbody > tr.AltListItem td:nth-child(5)")
     for(var i = 0; i < rows.length; i++){
