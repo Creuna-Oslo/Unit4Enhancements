@@ -4,7 +4,10 @@
   "name": "Unit4 UX Enhancements",
   "version": "0.1.4",
   "description": "Enhances the UX for Unit4",
-  "options_page": "options.html",
+  "options_ui": {
+    "chrome_style": true,
+    "page": "options.html"
+  },
  
   "permissions": [
     "storage"
@@ -16,5 +19,11 @@
     "run_at": "document_end",
     "js": ["content.js"],
     "matches": ["https://csportal12.u4a.se/p470014-web/*"]
-  }]
+  }],
+  "background":
+  {
+    "scripts":[
+    "message-broker.js"
+    ]
+  }
 }
