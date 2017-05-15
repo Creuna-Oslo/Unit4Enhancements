@@ -1,3 +1,7 @@
+## 0.1.5
+- Updated to new version of options page
+- Added link to options page from login page
+
 ## 0.1.4
 - Added settings page used to hide columns and set a default client for login
 - Added preview screenshot of timesheet to chrome store
