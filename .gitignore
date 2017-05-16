@@ -1,2 +1,4 @@
 .swp
 __MACOSX/**/*
+*.sublime-project
+*.sublime-workspace
