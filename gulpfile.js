@@ -1,6 +1,7 @@
 
 var gulp = require('gulp'),
-    zip = require('gulp-zip');
+    zip = require('gulp-zip'),
+	credentials = require('./credentials.js');
 
 
 gulp.task('zip-files', () =>
@@ -10,5 +11,10 @@ gulp.task('zip-files', () =>
 
 );
 
-gulp.task('default', ['zip-files']);
+gulp.task('publish', () =>
+    console.log(credentials.clientId)
+    //https://www.npmjs.com/package/chrome-webstore-upload
+);
+
+gulp.task('default', ['zip-files', 'publish']);
 

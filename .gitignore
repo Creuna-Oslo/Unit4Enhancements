@@ -2,3 +2,4 @@
 __MACOSX/**/*
 node_modules/**/*
 dist/**/*
+credentials.js
