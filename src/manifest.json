@@ -19,6 +19,12 @@
     "run_at": "document_end",
     "js": ["content.js"],
     "matches": ["https://csportal12.u4a.se/p470014-web/*"]
+  },
+  {
+    "all_frames": false,
+    "run_at": "document_end",
+    "js": ["jquery-3.2.1.min.js", "prevent-logout.js"],
+    "matches": ["https://csportal12.u4a.se/p470014-web/*"]
   }],
   "background":
   {

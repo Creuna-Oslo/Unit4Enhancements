@@ -5,6 +5,7 @@ function save_options() {
     const hideTimeCodeColumn = document.getElementById('hideTimeCodeColumn').checked;
     const hideProjectColumn = document.getElementById('hideProjectColumn').checked;
     const hideTimeUnitColumn = document.getElementById('hideTimeUnitColumn').checked;
+    const preventAutomaticLogout = document.getElementById('preventAutomaticLogout').checked;
 
     chrome.storage.sync.set({
         client,
@@ -13,7 +14,8 @@ function save_options() {
             "Time code": hideTimeCodeColumn,
             "Project": hideProjectColumn,
             "Time unit": hideTimeUnitColumn
-        }
+        },
+        preventAutomaticLogout
     }, function() {
         // Update status to let user know options were saved.
         var status = document.getElementById('status');
@@ -36,12 +38,14 @@ function restore_options() {
             "Project": false,
             "Time unit": false
         },
+        preventAutomaticLogout: ''
     }, function(items) {
         document.getElementById('client').value = items.client;
         document.getElementById('hideZoomColumn').checked = items.hideCells["Zoom"];
         document.getElementById('hideTimeCodeColumn').checked = items.hideCells["Time code"];
         document.getElementById('hideProjectColumn').checked = items.hideCells["Project"];
         document.getElementById('hideTimeUnitColumn').checked = items.hideCells["Time unit"];
+        document.getElementById('preventAutomaticLogout').checked = items.preventAutomaticLogout;
     });
 }
 
