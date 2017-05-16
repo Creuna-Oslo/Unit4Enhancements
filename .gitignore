@@ -1,2 +1,4 @@
 .swp
 __MACOSX/**/*
+node_modules/**/*
+dist/**/*

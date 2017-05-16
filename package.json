@@ -1,0 +1,23 @@
+{
+  "name": "unit4extension",
+  "version": "1.0.0",
+  "description": "A unit4 UX extension",
+  "main": "gulpfile.js",
+  "dependencies": {
+    "gulp-zip": "^4.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Arthyon/Unit4Enhancements.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Arthyon/Unit4Enhancements/issues"
+  },
+  "homepage": "https://github.com/Arthyon/Unit4Enhancements#readme"
+}
