@@ -1,14 +1,25 @@
-(function () {
-  chrome.storage.sync.get({
-      preventAutomaticLogout: ''
-    }, function(items) {
-      if(items.preventAutomaticLogout) {
-        new MutationObserver(function(mutations) {
-          mutations.forEach(function(mutation) {
-          })
-          var node = document.querySelector('[data-u4id="sessionmanager-countdownwindow_OK"]')
-          if (!!node) node.click()
-        }).observe(document.querySelector('body'), {childList: true})
-      }    
-     })
+(function() {
+  var checkForActiveStatusAndResetTimer = function (){
+    var xhrStatus = new XMLHttpRequest();
+    xhrStatus.open('GET', '/p470014-web/api/session/current', true)
+    xhrStatus.send()
+    xhrStatus.onreadystatechange = function(e) {
+      if (xhrStatus.readyState == 4 && xhrStatus.status == 200) {
+        var response = JSON.parse(xhrStatus.responseText)
+        if (response.active) {
+          var xhrRenew = new XMLHttpRequest()
+          xhrRenew.open('GET', '/p470014-web/api/session/current?renew=true', true)
+          xhrRenew.send()
+          xhrRenew.onreadystatechange = function(e) {
+            if (xhrRenew.readyState == 4 && xhrRenew.status == 200) {
+              var renewResponse = JSON.parse(xhrRenew.responseText)
+              console.log(renewResponse)
+            }
+          }
+        }    
+      }
+    }
+  }
+
+  setInterval(checkForActiveStatusAndResetTimer, 1000*60*5) //5 minutes
 })()
