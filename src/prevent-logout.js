@@ -21,5 +21,11 @@
     }
   }
 
-  setInterval(checkForActiveStatusAndResetTimer, 1000*60*5) //5 minutes
+  chrome.storage.sync.get({
+    preventAutomaticLogout: ''
+  }, function(items) {
+    if(items.preventAutomaticLogout) {
+      setInterval(checkForActiveStatusAndResetTimer, 1000*60*5) //5 minutes
+    }
+  })
 })()
