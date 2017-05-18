@@ -3,13 +3,12 @@
       preventAutomaticLogout: ''
     }, function(items) {
       if(items.preventAutomaticLogout) {
-        console.log('adding prevent automatic logout')
-        $(document).on('DOMNodeInserted', '[data-u4id="sessionmanager-countdownwindow"]', function(e) {
+        new MutationObserver(function(mutations) {
+          mutations.forEach(function(mutation) {
+          })
           var node = document.querySelector('[data-u4id="sessionmanager-countdownwindow_OK"]')
           if (!!node) node.click()
-        })
-      } else {
-        console.log('prevent automatic logout setting not set')
-      }
-    })
+        }).observe(document.querySelector('body'), {childList: true})
+      }    
+     })
 })()
