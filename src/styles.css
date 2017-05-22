@@ -67,6 +67,7 @@ tr.AltListItem td:nth-child(5) > div:first-child {
 
 /* Add padding to td rows when zoom column is hidden or it looks nasty */
 table.custom-zoom-field-hidden tr.ListItem td.GridCell,
-table.custom-zoom-field-hidden tr.AltListItem td.GridCell {
+table.custom-zoom-field-hidden tr.AltListItem td.GridCell,
+table.custom-zoom-field-hidden tr.SumItem td {
 	padding: 6px 10px;
 }
