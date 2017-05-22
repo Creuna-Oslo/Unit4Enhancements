@@ -4,10 +4,9 @@
   "description": "A unit4 UX extension",
   "main": "gulpfile.js",
   "dependencies": {
-    "chrome-webstore-upload": "^0.2.1",
-    "fs": "0.0.1-security",
     "gulp": "^3.9.1",
-    "gulp-zip": "^4.0.0"
+    "gulp-zip": "^4.0.0",
+    "webstore-upload": "0.0.7"
   },
   "devDependencies": {},
   "scripts": {

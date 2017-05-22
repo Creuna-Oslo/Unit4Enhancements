@@ -1,18 +1,28 @@
 
 const gulp = require('gulp'),
     zip = require('gulp-zip'),
-    fs = require('fs'),
-	credentials = require('./credentials.js');
+    upload = require('webstore-upload'),
+	credentials = require('./credentials.json');
 
-const webstore = require('chrome-webstore-upload')({
-    extensionId: 'phmpdjdaaenhgojfhacckdjpomnopkoh',
-    clientId: credentials.clientId,
-    clientSecret: credentials.clientSecret,
-    refreshToken: credentials.refreshToken
-});
+const appId = 'phmpdjdaaenhgojfhacckdjpomnopkoh';
 
-var token = undefined;
-
+var options = {
+    accounts:{
+        default:{
+            publish: false,
+            client_id: credentials.clientId,
+            client_secret: credentials.clientSecret,
+            refresh_token: credentials.refreshToken
+        }
+    },
+    extensions:{
+        unit4: {
+            appID: appId,
+            zip: "dist/archive.zip"
+        }
+    },
+    uploadExtensions: ['unit4']
+};
 
 gulp.task('zip-files', () =>
     gulp.src('src/*')
@@ -21,20 +31,11 @@ gulp.task('zip-files', () =>
 
 );
 
-gulp.task('fetch-token', callback => webstore.fetchToken().then(retrievedToken => {
-        token = retrievedToken;
-        callback();
-    })
-);
-
-gulp.task('upload', callback => {
-    const zipFile = fs.createReadStream('./dist/archive.zip');
-
-    webStore.uploadExisting(zipFile, token)
-        .then(resource => callback())
+gulp.task('publish', ['zip-files'], callback => {
+        upload(options, 'default')
+        .then(result => console.log(result))
+        .catch(error => console.error(error));
 });
 
-gulp.task('publish', callback => webstore.publish('default', token).then(resource => callback()));
-
-gulp.task('default', ['zip-files', 'fetch-token', 'upload', 'publish']);
+gulp.task('default', ['zip-files', 'publish']);
 
