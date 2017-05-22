@@ -1,3 +1,6 @@
+## 0.1.7
+- Optimized method for staying logged in indefinitely
+
 ## 0.1.6
 - Added option to stay logged in indefinitely
 
