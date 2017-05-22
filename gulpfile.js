@@ -9,7 +9,6 @@ const appId = 'phmpdjdaaenhgojfhacckdjpomnopkoh';
 var options = {
     accounts:{
         default:{
-            publish: false,
             client_id: credentials.clientId,
             client_secret: credentials.clientSecret,
             refresh_token: credentials.refreshToken
@@ -18,7 +17,8 @@ var options = {
     extensions:{
         unit4: {
             appID: appId,
-            zip: "dist/archive.zip"
+            zip: "dist/archive.zip",
+            publish: true
         }
     },
     uploadExtensions: ['unit4']
