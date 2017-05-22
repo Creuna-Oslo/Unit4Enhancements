@@ -5,7 +5,7 @@ chrome.storage.sync.get({
     hideCells: {}
 }, function(items) {
     if(items.affectTables) {
-        var tables = [];
+        let tables = [];
 
         if (items.affectTables["Timesheet"]) {
             let timesheet = document.getElementById("b_s89_g89s90");
