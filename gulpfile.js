@@ -7,7 +7,8 @@ const gulp = require('gulp'),
     babelify = require('babelify'),
     source = require('vinyl-source-stream'),
     rename = require('gulp-rename'),
-    es = require('event-stream');
+    es = require('event-stream'),
+    clean = require('gulp-clean');
 
 const appId = 'phmpdjdaaenhgojfhacckdjpomnopkoh';
 
@@ -44,7 +45,12 @@ gulp.task('copy', () =>
         './src/icons/*'
     ])
         .pipe(gulp.dest('dist'))
-)
+);
+
+gulp.task('clean', () =>
+    gulp.src('./dist/*', { read: false })
+        .pipe(clean())
+);
 
 gulp.task('zip-files', ['build', 'copy'], () =>
     gulp.src('dist/*')
@@ -80,5 +86,5 @@ gulp.task('store-publish', ['zip-files'], callback => {
 gulp.task('default', ['build', 'copy'], function() {
     watch(['src/**/*', '!src/*.bundle.js'], ['build', 'copy']);
 });
-gulp.task('publish', ['build', 'zip-files', 'store-publish']);
+gulp.task('publish', ['clean', 'build', 'zip-files', 'store-publish']);
 
