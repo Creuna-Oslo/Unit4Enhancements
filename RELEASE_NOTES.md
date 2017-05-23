@@ -1,3 +1,6 @@
+## 0.1.8
+- Added custom icons
+
 ## 0.1.7
 - Optimized method for staying logged in indefinitely
 
