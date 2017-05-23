@@ -1,3 +1,10 @@
+## 0.1.9
+- Added option for styling Timesheet Approval table
+- Added script bundling
+
+## 0.1.8
+- Added custom icons
+
 ## 0.1.7
 - Optimized method for staying logged in indefinitely
 
