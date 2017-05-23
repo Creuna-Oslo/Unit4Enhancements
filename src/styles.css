@@ -14,6 +14,10 @@ table.MainTable * {
 	width: 70px !important;
 }
 
+.custom-hide-time-code .gridCell[id*="headertimecode"] {
+	width: 100px !important;
+}
+
 .gridCell.ColumnZoom {
 	width: 50px !important;
 }
@@ -24,8 +28,8 @@ table.MainTable * {
 }
 
 /* Hide original work order item */
-tr.ListItem td:nth-child(5) > div:first-child,
-tr.AltListItem td:nth-child(5) > div:first-child {
+.custom-hide-work-order > div:first-child,
+.custom-hide-time-code > div:first-child {
 	display: none;
 }
 

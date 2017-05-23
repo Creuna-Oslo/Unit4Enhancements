@@ -3,6 +3,8 @@ function save_options() {
     const client = document.getElementById('client').value;
     const affectTimesheet = document.getElementById('affectTimesheet').checked;
     const affectTimesheetApproval = document.getElementById('affectTimesheetApproval').checked;
+    const showWorkOrderName = document.getElementById('showWorkOrderName').checked;
+    const showTimeCodeName = document.getElementById('showTimeCodeName').checked;
     const hideZoomColumn = document.getElementById('hideZoomColumn').checked;
     const hideTimeCodeColumn = document.getElementById('hideTimeCodeColumn').checked;
     const hideProjectColumn = document.getElementById('hideProjectColumn').checked;
@@ -14,6 +16,10 @@ function save_options() {
         affectTables: {
             "Timesheet": affectTimesheet,
             "TimesheetApproval": affectTimesheetApproval
+        },
+        tableOptions: {
+            "showWorkOrderName": showWorkOrderName,
+            "showTimeCodeName": showTimeCodeName
         },
         hideCells: {
             "Zoom": hideZoomColumn,
@@ -42,6 +48,10 @@ function restore_options() {
             "Timesheet": true,
             "TimesheetApproval": true,
         },
+        tableOptions: {
+            "showWorkOrderName": true,
+            "showTimeCodeName": false
+        },
         hideCells: {
             "Zoom": false,
             "Time code": false,
@@ -51,12 +61,14 @@ function restore_options() {
         preventAutomaticLogout: ''
     }, function(items) {
         document.getElementById('client').value = items.client;
-        document.getElementById('affectTimesheet').checked = items.affectTables["Timesheet"];
-        document.getElementById('affectTimesheetApproval').checked = items.affectTables["TimesheetApproval"];
-        document.getElementById('hideZoomColumn').checked = items.hideCells["Zoom"];
-        document.getElementById('hideTimeCodeColumn').checked = items.hideCells["Time code"];
-        document.getElementById('hideProjectColumn').checked = items.hideCells["Project"];
-        document.getElementById('hideTimeUnitColumn').checked = items.hideCells["Time unit"];
+        document.getElementById('affectTimesheet').checked = items.affectTables['Timesheet'];
+        document.getElementById('affectTimesheetApproval').checked = items.affectTables['TimesheetApproval'];
+        document.getElementById('showWorkOrderName').checked = items.tableOptions['showWorkOrderName'];
+        document.getElementById('showTimeCodeName').checked = items.tableOptions['showTimeCodeName'];
+        document.getElementById('hideZoomColumn').checked = items.hideCells['Zoom'];
+        document.getElementById('hideTimeCodeColumn').checked = items.hideCells['Time code'];
+        document.getElementById('hideProjectColumn').checked = items.hideCells['Project'];
+        document.getElementById('hideTimeUnitColumn').checked = items.hideCells['Time unit'];
         document.getElementById('preventAutomaticLogout').checked = items.preventAutomaticLogout;
     });
 }
