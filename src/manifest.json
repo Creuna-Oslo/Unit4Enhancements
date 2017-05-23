@@ -2,7 +2,7 @@
   "manifest_version": 2,
  
   "name": "Unit4 UX Enhancements",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "Enhances the UX for Unit4",
   "options_ui": {
     "chrome_style": true,
@@ -17,19 +17,19 @@
     "all_frames": true,
     "css": ["styles.css"],
     "run_at": "document_end",
-    "js": ["content.js"],
+    "js": ["all-frames.js"],
     "matches": ["https://csportal12.u4a.se/p470014-web/*"]
   },
   {
     "all_frames": false,
     "run_at": "document_end",
-    "js": ["prevent-logout.js"],
+    "js": ["root.js"],
     "matches": ["https://csportal12.u4a.se/p470014-web/*"]
   }],
   "background":
   {
     "scripts":[
-    "message-broker.js"
+      "background.js"
     ]
   }
 }

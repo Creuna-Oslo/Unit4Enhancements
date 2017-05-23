@@ -6,7 +6,10 @@ This is a chrome plugin to enhance the UX when logging hours in Unit4
 
 **As a developer**
 
-Download the files to a folder, go to chrome://extensions and drag and drop this folder.
+- Download the files or clone.
+- Run `npm install`
+- Run `gulp` (This will build the extension and start atomatic building on file changes)
+- Go to chrome://extensions and drag and drop the **dist** folder.
 
 **As a user**
 

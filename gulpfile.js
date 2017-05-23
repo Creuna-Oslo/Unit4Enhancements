@@ -2,40 +2,82 @@
 const gulp = require('gulp'),
     zip = require('gulp-zip'),
     upload = require('webstore-upload'),
-	credentials = require('./credentials.json');
+    watch = require('gulp-chokidar')(gulp),
+    browserify = require('browserify'),
+    babelify = require('babelify'),
+    source = require('vinyl-source-stream'),
+    rename = require('gulp-rename'),
+    es = require('event-stream');
 
 const appId = 'phmpdjdaaenhgojfhacckdjpomnopkoh';
 
-var options = {
-    accounts:{
-        default:{
-            client_id: credentials.clientId,
-            client_secret: credentials.clientSecret,
-            refresh_token: credentials.refreshToken
-        }
-    },
-    extensions:{
-        unit4: {
-            appID: appId,
-            zip: "dist/archive.zip",
-            publish: true
-        }
-    },
-    uploadExtensions: ['unit4']
-};
+// Build scripts
+gulp.task('build', () => {
+    const entries = [
+        './src/all-frames.js',
+        './src/root.js',
+        './src/background.js'
+    ];
 
-gulp.task('zip-files', () =>
-    gulp.src('src/*')
+    var tasks = entries.map(entry =>
+        browserify({
+            entries: entry,
+            transform: [[babelify, { presets: ["es2015"] }]]
+        })
+            .bundle()
+            .pipe(source(entry))
+            .pipe(rename({
+                dirname: './'
+            }))
+            .pipe(gulp.dest('./dist'))
+    );
+
+    return es.merge.apply(null, tasks);
+});
+
+// Copy static files
+gulp.task('copy', () => 
+    gulp.src([
+        './src/options/*',
+        './src/manifest.json',
+        './src/styles.css'
+    ])
+        .pipe(gulp.dest('dist'))
+)
+
+gulp.task('zip-files', ['build', 'copy'], () =>
+    gulp.src('dist/*')
         .pipe(zip('archive.zip'))
         .pipe(gulp.dest('dist'))
-
 );
 
-gulp.task('publish', ['zip-files'], callback => {
-        upload(options, 'default')
+gulp.task('store-publish', ['zip-files'], callback => {
+    const credentials = require('./credentials.json'),
+    options = {
+        accounts:{
+            default:{
+                client_id: credentials.clientId,
+                client_secret: credentials.clientSecret,
+                refresh_token: credentials.refreshToken
+            }
+        },
+        extensions:{
+            unit4: {
+                appID: appId,
+                zip: "dist/archive.zip",
+                publish: true
+            }
+        },
+        uploadExtensions: ['unit4']
+    };
+
+    upload(options, 'default')
         .then(result => console.log(result))
         .catch(error => console.error(error));
 });
 
-gulp.task('default', ['zip-files', 'publish']);
+gulp.task('default', ['build', 'copy'], function() {
+    watch(['src/**/*', '!src/*.bundle.js'], ['build', 'copy']);
+});
+gulp.task('publish', ['build', 'zip-files', 'store-publish']);
 
