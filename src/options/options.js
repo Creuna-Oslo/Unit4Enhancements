@@ -1,6 +1,8 @@
 // Saves options to chrome.storage
 function save_options() {
     const client = document.getElementById('client').value;
+    const affectTimesheet = document.getElementById('affectTimesheet').checked;
+    const affectTimesheetApproval = document.getElementById('affectTimesheetApproval').checked;
     const hideZoomColumn = document.getElementById('hideZoomColumn').checked;
     const hideTimeCodeColumn = document.getElementById('hideTimeCodeColumn').checked;
     const hideProjectColumn = document.getElementById('hideProjectColumn').checked;
@@ -9,6 +11,10 @@ function save_options() {
 
     chrome.storage.sync.set({
         client,
+        affectTables: {
+            "Timesheet": affectTimesheet,
+            "TimesheetApproval": affectTimesheetApproval
+        },
         hideCells: {
             "Zoom": hideZoomColumn,
             "Time code": hideTimeCodeColumn,
@@ -32,6 +38,10 @@ function restore_options() {
     // Use default value color = 'red' and likesColor = true.
     chrome.storage.sync.get({
         client: '',
+        affectTables: {
+            "Timesheet": true,
+            "TimesheetApproval": true,
+        },
         hideCells: {
             "Zoom": false,
             "Time code": false,
@@ -41,6 +51,8 @@ function restore_options() {
         preventAutomaticLogout: ''
     }, function(items) {
         document.getElementById('client').value = items.client;
+        document.getElementById('affectTimesheet').checked = items.affectTables["Timesheet"];
+        document.getElementById('affectTimesheetApproval').checked = items.affectTables["TimesheetApproval"];
         document.getElementById('hideZoomColumn').checked = items.hideCells["Zoom"];
         document.getElementById('hideTimeCodeColumn').checked = items.hideCells["Time code"];
         document.getElementById('hideProjectColumn').checked = items.hideCells["Project"];

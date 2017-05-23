@@ -1,5 +1,8 @@
 .swp
 __MACOSX/**/*
+*.sublime-project
+*.sublime-workspace
 node_modules/**/*
 dist/**/*
 credentials.json
+*.bundle.js
