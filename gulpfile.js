@@ -40,7 +40,8 @@ gulp.task('copy', () =>
     gulp.src([
         './src/options/*',
         './src/manifest.json',
-        './src/styles.css'
+        './src/styles.css',
+        './src/icons/*'
     ])
         .pipe(gulp.dest('dist'))
 )
