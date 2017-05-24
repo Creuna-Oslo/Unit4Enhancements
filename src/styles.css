@@ -3,29 +3,29 @@ table.MainTable{
     max-width: 1800px;
 }
 
-table.MainTable * {
+table.MainTable .custom-timesheet * {
 	white-space: normal !important;
 }
 
 /* Set dimensions on table headers */
-.gridCell[id*="headerreg_value"],
-.gridCell[id*="headerreg_unit"],
-.gridCell[id*="headertimecode"] {
+.custom-timesheet .gridCell[id*="headerreg_value"],
+.custom-timesheet .gridCell[id*="headerreg_unit"],
+.custom-timesheet .gridCell[id*="headertimecode"] {
 	width: 70px !important;
 }
 
-.gridCell.ColumnZoom {
+.custom-timesheet .gridCell.ColumnZoom {
 	width: 50px !important;
 }
 
-.gridCell[id*="headerdescription"],
-.gridCell[id*="headerwork_order"] {
+.custom-timesheet .gridCell[id*="headerdescription"],
+.custom-timesheet .gridCell[id*="headerwork_order"] {
 	width: auto !important;
 }
 
 /* Hide original work order item */
-tr.ListItem td:nth-child(5) > div:first-child,
-tr.AltListItem td:nth-child(5) > div:first-child {
+.custom-timesheet tr.ListItem td:nth-child(5) > div:first-child:not(:only-child),
+.custom-timesheet tr.AltListItem td:nth-child(5) > div:first-child:not(:only-child) {
 	display: none;
 }
 
@@ -48,20 +48,20 @@ tr.AltListItem td:nth-child(5) > div:first-child {
 }
 
 /* Format sum cols and rows */
-.LastVisibleHeaderCell,
-.SumItem,
-.GridCell:nth-last-child(2) {
+.custom-timesheet .LastVisibleHeaderCell,
+.custom-timesheet .SumItem,
+.custom-timesheet .GridCell:nth-last-child(2) {
 	font-weight: bold !important;
 }
 
-.SumItem td {
+.custom-timesheet .SumItem td {
 	padding-top: 5px !important;
 	padding-bottom: 5px !important;
 	border-top: 1px solid black !important;
 }
 
 /* Make green backgrounds (for holidays and weekends) red instead of green */
-.GridCell[style*="background-color"][style*="#00ff00"] {
+.custom-timesheet .GridCell[style*="background-color"][style*="#00ff00"] {
 	background-color: #ffe0e0 !important;
 }
 
