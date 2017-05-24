@@ -1,3 +1,7 @@
+## 0.1.14
+- Added option to show time code text instead of code
+- Tweaks to options window
+
 ## 0.1.13
 - Actually added css that should be included in 0.1.11
 

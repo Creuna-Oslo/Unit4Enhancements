@@ -14,6 +14,10 @@ table.MainTable .custom-timesheet * {
 	width: 70px !important;
 }
 
+.custom-hide-time-code .gridCell[id*="headertimecode"] {
+	width: 100px !important;
+}
+
 .custom-timesheet .gridCell.ColumnZoom {
 	width: 50px !important;
 }
@@ -24,8 +28,8 @@ table.MainTable .custom-timesheet * {
 }
 
 /* Hide original work order item */
-.custom-timesheet tr.ListItem td:nth-child(5) > div:first-child:not(:only-child),
-.custom-timesheet tr.AltListItem td:nth-child(5) > div:first-child:not(:only-child) {
+.custom-hide-work-order > div:first-child,
+.custom-hide-time-code > div:first-child {
 	display: none;
 }
 

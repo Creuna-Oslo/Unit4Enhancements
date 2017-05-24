@@ -1,6 +1,7 @@
 // Get stored options
 chrome.storage.sync.get({
     affectTables: {},
+    tableOptions: {},
     hideCells: {}
 }, function(items) {
     if(items.affectTables) {
@@ -21,28 +22,52 @@ chrome.storage.sync.get({
         }
 
         tables.forEach(function(table) {
-            var rows = table.querySelectorAll("tbody > tr.ListItem td:nth-child(5), tbody > tr.AltListItem td:nth-child(5)")
-            for(var i = 0; i < rows.length; i++){
-                var tableCell = rows[i];
-                var title = tableCell.getAttribute("title");
+            if (items.tableOptions["showTimeCodeName"]) {
+                table.className += " custom-hide-time-code";
+            }
 
-                // Remove work order id from string. Assumes that work order IDs consist of 7 digits followed by a dash and three more digits
-                title = title.replace(/(- [0-9]{7}-[0-9]{3})$/, "");
+            var rows = table.querySelectorAll("tbody > tr.ListItem, tbody > tr.AltListItem");
 
-                // Make Customer title bold. Assumes that everything before the first dash is the customer name
-                var customerRegExp = new RegExp(/[^-]*/),
-                    customerString = title.match(customerRegExp);
-                if (customerString.length) {
-                    title = title.replace(customerRegExp, "<span class='custom-customer-name'>" + customerString[0] + "</span>");
+            rows.forEach(function(row){
+                var workOrderCell = row.querySelectorAll("td:nth-child(5)")[0],
+                    timeCodeCell = row.querySelectorAll("td:nth-child(4)")[0];
+
+                if (items.tableOptions["showWorkOrderName"]) {
+                    let title = workOrderCell.getAttribute("title");
+
+                    // Remove work order id from string. Assumes that work order IDs consist of 7 digits followed by a dash and three more digits
+                    title = title.replace(/(- [0-9]{7}-[0-9]{3})$/, "");
+
+                    // Make Customer title bold. Assumes that everything before the first dash is the customer name
+                    let customerRegExp = new RegExp(/[^-]*/),
+                        customerString = title.match(customerRegExp);
+
+                    if (customerString.length) {
+                        title = title.replace(customerRegExp, "<span class='custom-customer-name'>" + customerString[0] + "</span>");
+                    }
+
+                    let titleDiv = document.createElement("div");
+                    titleDiv.innerHTML = title;
+                    titleDiv.className += " custom-project-name";
+
+                    workOrderCell.className += " custom-hide-work-order";
+                    workOrderCell.appendChild(titleDiv);
                 }
 
+                if (items.tableOptions["showTimeCodeName"]) {
+                    let title = timeCodeCell.getAttribute("title");
 
-                var titleDiv = document.createElement("div");
-                titleDiv.innerHTML = title;
-                titleDiv.className += " custom-project-name";
+                    // Remove time code from string. Assumes that time codes consists of "TC" letters followed by two digits
+                    title = title.replace(/- TC[0-9]{2}$/, "");
 
-                tableCell.appendChild(titleDiv);
-            }
+                    let titleDiv = document.createElement("div");
+                    titleDiv.innerHTML = title;
+                    titleDiv.className += " custom-timecode-name";
+
+                    timeCodeCell.className += " custom-hide-time-code";
+                    timeCodeCell.appendChild(titleDiv);
+                }
+            });
 
             var hourCells = table.querySelectorAll("td[onClick*='PostBack'][onClick*='reg_value'], .GridCell.SumColumn");
 
