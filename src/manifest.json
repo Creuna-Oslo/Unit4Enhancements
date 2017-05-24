@@ -2,7 +2,7 @@
   "manifest_version": 2,
  
   "name": "Unit4 UX Enhancements",
-  "version": "0.1.13",
+  "version": "0.1.14",
   "description": "Enhances the UX for Unit4",
   "options_ui": {
     "chrome_style": true,
