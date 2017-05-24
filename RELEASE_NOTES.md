@@ -1,3 +1,9 @@
+## 0.1.13
+- Actually added css that should be included in 0.1.11
+
+## 0.1.11
+- Scoped stylesheets so options for turning off style should work
+
 ## 0.1.9
 - Added option for styling Timesheet Approval table
 - Added script bundling

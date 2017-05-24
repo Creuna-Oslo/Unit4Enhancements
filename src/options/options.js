@@ -46,7 +46,7 @@ function restore_options() {
         client: '',
         affectTables: {
             "Timesheet": true,
-            "TimesheetApproval": true,
+            "TimesheetApproval": false,
         },
         tableOptions: {
             "showWorkOrderName": true,

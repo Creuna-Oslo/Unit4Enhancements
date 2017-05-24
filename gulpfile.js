@@ -13,7 +13,7 @@ const gulp = require('gulp'),
 const appId = 'phmpdjdaaenhgojfhacckdjpomnopkoh';
 
 // Build scripts
-gulp.task('build', () => {
+gulp.task('build', ['clean'], () => {
     const entries = [
         './src/all-frames.js',
         './src/root.js',
@@ -37,7 +37,7 @@ gulp.task('build', () => {
 });
 
 // Copy static files
-gulp.task('copy', () => 
+gulp.task('copy', ['clean'], () => 
     gulp.src([
         './src/options/*',
         './src/manifest.json',
