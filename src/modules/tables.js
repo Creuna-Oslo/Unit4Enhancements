@@ -8,10 +8,16 @@ chrome.storage.sync.get({
 
         if (items.affectTables["Timesheet"]) {
             let timesheet = document.getElementById("b_s89_g89s90");
-            timesheet && tables.push(timesheet);
+            if (timesheet) {
+                timesheet.className += " custom-timesheet";
+                tables.push(timesheet);
+            }
         } else if (items.affectTables["TimesheetApproval"]) {
             let timesheetApproval = document.getElementById("b_g1105s5");
-            timesheetApproval && tables.push(timesheetApproval);
+            if (timesheetApproval) {
+                timesheetApproval.className += " custom-timesheet-approval";
+                tables.push(timesheetApproval);
+            }
         }
 
         tables.forEach(function(table) {
