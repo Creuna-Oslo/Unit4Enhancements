@@ -40,7 +40,7 @@ function restore_options() {
         client: '',
         affectTables: {
             "Timesheet": true,
-            "TimesheetApproval": true,
+            "TimesheetApproval": false,
         },
         hideCells: {
             "Zoom": false,
