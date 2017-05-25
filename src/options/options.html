@@ -5,6 +5,7 @@
     <style>
         body {
             position: relative;
+            padding-bottom: 50px;
         }
 
         .input-group {
@@ -37,6 +38,11 @@
             margin: 0 0 5px;
         }
 
+        .description {
+            margin-top: -5px;
+            color: gray;
+        }
+
         #status {
             position: fixed;
             top: 0;
@@ -45,6 +51,16 @@
             background-color: #afc836;
             text-align: center;
             line-height: 40px;
+        }
+
+        .save-container {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            padding: 10px;
+            background-color: whitesmoke;
+            box-shadow: 0 -20px 30px white;
         }
 
     </style>
@@ -92,8 +108,8 @@
             </label>
         </p>
     </div>
+    <h1>Experimental</h1>
     <div class="input">
-        <h1>Experimental</h1>
         <p class="heading">Hide timesheet columns</p>
         <p>
             <label>
@@ -116,7 +132,18 @@
             </label>
         </p>
     </div>
-    <button id="save">Save</button>
+    <div class="input">
+        <p class="heading">Automatically save timesheet</p>
+        <p class="description">(When adding, deleting or copying hours)</p>
+        <p>
+            <label>
+                <input type="checkbox" id="autoSaveTimesheet" /> Yup
+            </label>
+        </p>
+    </div>
+    <div class="save-container">
+        <button id="save">Save</button>
+    </div>
     <div id="status"></div>
     <script src="options.js"></script>
 </body>
