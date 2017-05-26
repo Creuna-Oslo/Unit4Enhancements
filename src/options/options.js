@@ -11,6 +11,7 @@ function save_options() {
     const hideTimeUnitColumn = document.getElementById('hideTimeUnitColumn').checked;
     const preventAutomaticLogout = document.getElementById('preventAutomaticLogout').checked;
     const autoSaveTimesheet = document.getElementById('autoSaveTimesheet').checked;
+    const autoHideSaveConfirmation = document.getElementById('autoHideSaveConfirmation').checked;
 
     chrome.storage.sync.set({
         client,
@@ -29,7 +30,8 @@ function save_options() {
             "Time unit": hideTimeUnitColumn
         },
         preventAutomaticLogout,
-        autoSaveTimesheet
+        autoSaveTimesheet,
+        autoHideSaveConfirmation
     }, function() {
         // Update status to let user know options were saved.
         var status = document.getElementById('status');
@@ -62,6 +64,7 @@ function restore_options() {
         },
         preventAutomaticLogout: '',
         autoSaveTimesheet: false,
+        autoHideSaveConfirmation: false
     }, function(items) {
         document.getElementById('client').value = items.client;
         document.getElementById('affectTimesheet').checked = items.affectTables['Timesheet'];
@@ -74,6 +77,7 @@ function restore_options() {
         document.getElementById('hideTimeUnitColumn').checked = items.hideCells['Time unit'];
         document.getElementById('preventAutomaticLogout').checked = items.preventAutomaticLogout;
         document.getElementById('autoSaveTimesheet').checked = items.autoSaveTimesheet;
+        document.getElementById('autoHideSaveConfirmation').checked = items.autoHideSaveConfirmation;
     });
 }
 

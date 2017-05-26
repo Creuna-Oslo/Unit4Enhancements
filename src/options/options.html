@@ -8,6 +8,10 @@
             padding-bottom: 50px;
         }
 
+        p {
+            line-height: 1.4;
+        }
+
         .input-group {
             display: -webkit-flex;
             display: -moz-flex;
@@ -36,11 +40,6 @@
         .heading {
             font-weight: bold;
             margin: 0 0 5px;
-        }
-
-        .description {
-            margin-top: -5px;
-            color: gray;
         }
 
         #status {
@@ -110,6 +109,19 @@
     </div>
     <h1>Experimental</h1>
     <div class="input">
+        <p class="heading">Saving</p>
+        <p>
+            <label>
+                <input type="checkbox" id="autoSaveTimesheet" /> Auto-save (When adding, deleting or copying hours)
+            </label>
+        </p>
+        <p>
+            <label>
+                <input type="checkbox" id="autoHideSaveConfirmation" /> Auto-hide confirmation message
+            </label>
+        </p>
+    </div>
+    <div class="input">
         <p class="heading">Hide timesheet columns</p>
         <p>
             <label>
@@ -129,15 +141,6 @@
         <p>
             <label>
                 <input type="checkbox" id="hideTimeUnitColumn" /> Time unit
-            </label>
-        </p>
-    </div>
-    <div class="input">
-        <p class="heading">Automatically save timesheet</p>
-        <p class="description">(When adding, deleting or copying hours)</p>
-        <p>
-            <label>
-                <input type="checkbox" id="autoSaveTimesheet" /> Yup
             </label>
         </p>
     </div>
