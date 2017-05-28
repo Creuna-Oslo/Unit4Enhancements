@@ -1,3 +1,23 @@
+function getIndex(row, target) {
+    for (var i=0; i<row.length; i++) {
+        if (row[i] == target) { return i; }
+    }
+
+    return -1;
+}
+
+function getIndexes(row, targetCells) {
+    var indexes = [];
+
+    row.forEach(function(cell, i){
+        targetCells.forEach(function(target){
+            if (cell == target) { indexes.push(i); }
+        });
+    });
+
+    return indexes;
+}
+
 // Get stored options
 chrome.storage.sync.get({
     affectTables: {},
@@ -13,7 +33,9 @@ chrome.storage.sync.get({
                 timesheet.className += " custom-timesheet";
                 tables.push(timesheet);
             }
-        } else if (items.affectTables["TimesheetApproval"]) {
+        }
+
+        if (items.affectTables["TimesheetApproval"]) {
             let timesheetApproval = document.getElementById("b_g1105s5");
             if (timesheetApproval) {
                 timesheetApproval.className += " custom-timesheet-approval";
@@ -26,13 +48,18 @@ chrome.storage.sync.get({
                 table.className += " custom-hide-time-code";
             }
 
-            var rows = table.querySelectorAll("tbody > tr.ListItem, tbody > tr.AltListItem");
+            var rows = table.querySelectorAll("tbody > tr.ListItem, tbody > tr.AltListItem, tbody > tr.MarkRow"),
+                headerRow = table.querySelectorAll("thead th");
 
             rows.forEach(function(row){
-                var workOrderCell = row.querySelectorAll("td:nth-child(5)")[0],
-                    timeCodeCell = row.querySelectorAll("td:nth-child(4)")[0];
+                var cells = row.children,
+                    workOrderIndex = getIndex(headerRow, table.querySelector('thead [id*="headerwork_order"]')),
+                    timeCodeIndex = getIndex(headerRow, table.querySelector('thead [id*="headertimecode"]')),
+                    workOrderCell = cells[workOrderIndex],
+                    timeCodeCell = cells[timeCodeIndex];
 
-                if (items.tableOptions["showWorkOrderName"]) {
+                // Show work order name, hide work order code
+                if (items.tableOptions["showWorkOrderName"] && workOrderCell) {
                     let title = workOrderCell.getAttribute("title");
 
                     // Remove work order id from string. Assumes that work order IDs consist of 7 digits followed by a dash and three more digits
@@ -54,7 +81,8 @@ chrome.storage.sync.get({
                     workOrderCell.appendChild(titleDiv);
                 }
 
-                if (items.tableOptions["showTimeCodeName"]) {
+                // Show timecode text, hide timecode code
+                if (items.tableOptions["showTimeCodeName"] && timeCodeCell) {
                     let title = timeCodeCell.getAttribute("title");
 
                     // Remove time code from string. Assumes that time codes consists of "TC" letters followed by two digits
@@ -67,20 +95,22 @@ chrome.storage.sync.get({
                     timeCodeCell.className += " custom-hide-time-code";
                     timeCodeCell.appendChild(titleDiv);
                 }
+
+                // Add styles to hour cells
+                var hourCellIndexes = getIndexes(headerRow, table.querySelectorAll('th[id*=headerreg_value]')),
+                    hourCells = table.querySelectorAll("td[onClick*='PostBack'][onClick*='reg_value'], .GridCell.SumColumn");
+
+                hourCellIndexes.forEach(function(i){
+                    var textEl = cells[i].getElementsByTagName("div")[0],
+                        text = textEl.innerText;
+
+                    if (text !== "0,00" && text !== "0.00") {
+                        textEl.className += " custom-nonzero-hours";
+                    } else {
+                        textEl.className += " custom-zero-hours";
+                    }
+                });
             });
-
-            var hourCells = table.querySelectorAll("td[onClick*='PostBack'][onClick*='reg_value'], .GridCell.SumColumn");
-
-            for (var i = 0; i < hourCells.length; i++) {
-                var textEl = hourCells[i].getElementsByTagName("div")[0],
-                    text = textEl.innerText;
-
-                if (text !== "0,00" && text !== "0.00") {
-                    textEl.className += " custom-nonzero-hours";
-                } else {
-                    textEl.className += " custom-zero-hours";
-                }
-            }
 
             function hideColumn(type) {
                 // Hide table head column

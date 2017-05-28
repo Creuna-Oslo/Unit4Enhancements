@@ -7,6 +7,7 @@ table.MainTable .custom-timesheet * {
 	white-space: normal !important;
 }
 
+// Timesheet table column sizing
 .custom-timesheet {
 	// Set dimensions on table headers
 	.gridCell[id*="headerreg_value"],
@@ -23,7 +24,10 @@ table.MainTable .custom-timesheet * {
 	.gridCell.ColumnZoom {
 		width: 50px !important;
 	}
+}
 
+.custom-timesheet,
+.custom-timesheet-approval {
 	// Format sum cols and rows
 	.LastVisibleHeaderCell,
 	.SumItem,
@@ -41,7 +45,6 @@ table.MainTable .custom-timesheet * {
 	.GridCell[style*="background-color"][style*="#00ff00"] {
 		background-color: #ffe0e0 !important;
 	}
-
 }
 
 .custom-hide-time-code .gridCell[id*="headertimecode"] {
