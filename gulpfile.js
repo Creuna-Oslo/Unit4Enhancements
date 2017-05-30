@@ -8,7 +8,8 @@ const gulp = require('gulp'),
     source = require('vinyl-source-stream'),
     rename = require('gulp-rename'),
     es = require('event-stream'),
-    clean = require('gulp-clean');
+    clean = require('gulp-clean'),
+    sass = require('gulp-sass');
 
 const appId = 'phmpdjdaaenhgojfhacckdjpomnopkoh';
 
@@ -36,12 +37,18 @@ gulp.task('build', ['clean'], () => {
     return es.merge.apply(null, tasks);
 });
 
+// Compile sass
+gulp.task('styles', ['clean'], () =>
+    gulp.src('./src/styles.scss')
+        .pipe(sass().on('error', sass.logError))
+        .pipe(gulp.dest('dist'))
+);
+
 // Copy static files
 gulp.task('copy', ['clean'], () => 
     gulp.src([
         './src/options/*',
         './src/manifest.json',
-        './src/styles.css',
         './src/icons/*'
     ])
         .pipe(gulp.dest('dist'))
@@ -52,7 +59,7 @@ gulp.task('clean', () =>
         .pipe(clean())
 );
 
-gulp.task('zip-files', ['build', 'copy'], () =>
+gulp.task('zip-files', ['build', 'copy', 'styles'], () =>
     gulp.src('dist/*')
         .pipe(zip('archive.zip'))
         .pipe(gulp.dest('dist'))
@@ -83,8 +90,8 @@ gulp.task('store-publish', ['zip-files'], callback => {
         .catch(error => console.error(error));
 });
 
-gulp.task('default', ['build', 'copy'], function() {
-    watch(['src/**/*', '!src/*.bundle.js'], ['build', 'copy']);
+gulp.task('default', ['build', 'copy', 'styles'], function() {
+    watch(['src/**/*', '!src/*.bundle.js'], ['build', 'copy', 'styles']);
 });
-gulp.task('publish', ['clean', 'build', 'copy', 'zip-files', 'store-publish']);
+gulp.task('publish', ['clean', 'build', 'copy', 'styles', 'zip-files', 'store-publish']);
 

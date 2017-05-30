@@ -1,0 +1,136 @@
+table.MainTable {
+    width: 100% !important;
+    max-width: 1800px;
+}
+
+table.MainTable .custom-timesheet * {
+	white-space: normal !important;
+}
+
+// Timesheet table column sizing
+.custom-timesheet {
+	// Set dimensions on table headers
+	.gridCell[id*="headerreg_value"],
+	.gridCell[id*="headerreg_unit"],
+	.gridCell[id*="headertimecode"] {
+		width: 70px !important;
+	}
+
+	.gridCell[id*="headerdescription"],
+	.gridCell[id*="headerwork_order"] {
+		width: auto !important;
+	}
+
+	.gridCell.ColumnZoom {
+		width: 50px !important;
+	}
+}
+
+.custom-timesheet,
+.custom-timesheet-approval {
+	// Format sum cols and rows
+	.LastVisibleHeaderCell,
+	.SumItem,
+	.GridCell:nth-last-child(2) {
+		font-weight: bold !important;
+	}
+
+	.SumItem td {
+		padding-top: 5px !important;
+		padding-bottom: 5px !important;
+		border-top: 1px solid black !important;
+	}
+
+	// Make green backgrounds (for holidays and weekends) red instead of green
+	.GridCell[style*="background-color"][style*="#00ff00"] {
+		background-color: #ffe0e0 !important;
+	}
+}
+
+.custom-hide-time-code .gridCell[id*="headertimecode"] {
+	width: 100px !important;
+}
+
+// Hide original work order item
+.custom-hide-work-order > div:first-child,
+.custom-hide-time-code > div:first-child {
+	display: none;
+}
+
+// Format custom work order text
+.custom-project-name {
+	white-space: normal;
+}
+
+.custom-customer-name {
+	font-weight: bold;
+}
+
+// Style hour cells with zero registered hours
+.custom-nonzero-hours {
+	font-weight: bold;
+}
+
+.custom-zero-hours {
+	opacity: 0.5;
+}
+
+// Add padding to td rows when zoom column is hidden or it looks nasty
+table.custom-zoom-field-hidden {
+	tr.ListItem td.GridCell,
+	tr.AltListItem td.GridCell,
+	tr.SumItem td {
+		padding: 6px 10px;
+	}
+}
+
+// Hide save confirmation page overlay
+.custom-hide-overlay .x-mask {
+	display: none;
+}
+
+.custom-save-confirmation {
+	height: auto !important;
+	top: 0 !important;
+	left: 0 !important;
+	width: 100% !important;
+
+	.x-box-inner {
+		height: 50px !important;
+		width: 100% !important;
+	}
+
+	.x-box-target {
+		width: 100% !important;
+	}
+
+	.u4-messageoverlay-success-footer,
+	.u4-messageoverlay-success-body {
+		display: none;
+	}
+
+	.u4-messageoverlay-success-background-close-icon {
+		display: none;
+	}
+
+	.u4-messageoverlay-success-header {
+		top: 0 !important;
+		left: 0 !important;
+	    text-align: center;
+	    padding: 15px !important;
+	    height: auto !important;
+	    width: 100% !important;
+	}
+
+	.u4-messageoverlay-success-icon {
+		display: inline-block;
+		vertical-align: middle;
+		position: static;
+	}
+
+	.u4-messageoverlay-success-header-text {
+		display: inline-block;
+		vertical-align: middle;
+		padding-left: 10px;
+	}
+}

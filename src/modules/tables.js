@@ -1,6 +1,27 @@
+function getIndex(row, target) {
+    for (var i=0; i<row.length; i++) {
+        if (row[i] == target) { return i; }
+    }
+
+    return -1;
+}
+
+function getIndexes(row, targetCells) {
+    var indexes = [];
+
+    row.forEach(function(cell, i){
+        targetCells.forEach(function(target){
+            if (cell == target) { indexes.push(i); }
+        });
+    });
+
+    return indexes;
+}
+
 // Get stored options
 chrome.storage.sync.get({
     affectTables: {},
+    tableOptions: {},
     hideCells: {}
 }, function(items) {
     if(items.affectTables) {
@@ -12,7 +33,9 @@ chrome.storage.sync.get({
                 timesheet.className += " custom-timesheet";
                 tables.push(timesheet);
             }
-        } else if (items.affectTables["TimesheetApproval"]) {
+        }
+
+        if (items.affectTables["TimesheetApproval"]) {
             let timesheetApproval = document.getElementById("b_g1105s5");
             if (timesheetApproval) {
                 timesheetApproval.className += " custom-timesheet-approval";
@@ -21,41 +44,73 @@ chrome.storage.sync.get({
         }
 
         tables.forEach(function(table) {
-            var rows = table.querySelectorAll("tbody > tr.ListItem td:nth-child(5), tbody > tr.AltListItem td:nth-child(5)")
-            for(var i = 0; i < rows.length; i++){
-                var tableCell = rows[i];
-                var title = tableCell.getAttribute("title");
-
-                // Remove work order id from string. Assumes that work order IDs consist of 7 digits followed by a dash and three more digits
-                title = title.replace(/(- [0-9]{7}-[0-9]{3})$/, "");
-
-                // Make Customer title bold. Assumes that everything before the first dash is the customer name
-                var customerRegExp = new RegExp(/[^-]*/),
-                    customerString = title.match(customerRegExp);
-                if (customerString.length) {
-                    title = title.replace(customerRegExp, "<span class='custom-customer-name'>" + customerString[0] + "</span>");
-                }
-
-
-                var titleDiv = document.createElement("div");
-                titleDiv.innerHTML = title;
-                titleDiv.className += " custom-project-name";
-
-                tableCell.appendChild(titleDiv);
+            if (items.tableOptions["showTimeCodeName"]) {
+                table.className += " custom-hide-time-code";
             }
 
-            var hourCells = table.querySelectorAll("td[onClick*='PostBack'][onClick*='reg_value'], .GridCell.SumColumn");
+            var rows = table.querySelectorAll("tbody > tr.ListItem, tbody > tr.AltListItem, tbody > tr.MarkRow"),
+                headerRow = table.querySelectorAll("thead th");
 
-            for (var i = 0; i < hourCells.length; i++) {
-                var textEl = hourCells[i].getElementsByTagName("div")[0],
-                    text = textEl.innerText;
+            rows.forEach(function(row){
+                var cells = row.children,
+                    workOrderIndex = getIndex(headerRow, table.querySelector('thead [id*="headerwork_order"]')),
+                    timeCodeIndex = getIndex(headerRow, table.querySelector('thead [id*="headertimecode"]')),
+                    workOrderCell = cells[workOrderIndex],
+                    timeCodeCell = cells[timeCodeIndex];
 
-                if (text !== "0,00" && text !== "0.00") {
-                    textEl.className += " custom-nonzero-hours";
-                } else {
-                    textEl.className += " custom-zero-hours";
+                // Show work order name, hide work order code
+                if (items.tableOptions["showWorkOrderName"] && workOrderCell) {
+                    let title = workOrderCell.getAttribute("title");
+
+                    // Remove work order id from string. Assumes that work order IDs consist of 7 digits followed by a dash and three more digits
+                    title = title.replace(/(- [0-9]{7}-[0-9]{3})$/, "");
+
+                    // Make Customer title bold. Assumes that everything before the first dash is the customer name
+                    let customerRegExp = new RegExp(/[^-]*/),
+                        customerString = title.match(customerRegExp);
+
+                    if (customerString.length) {
+                        title = title.replace(customerRegExp, "<span class='custom-customer-name'>" + customerString[0] + "</span>");
+                    }
+
+                    let titleDiv = document.createElement("div");
+                    titleDiv.innerHTML = title;
+                    titleDiv.className += " custom-project-name";
+
+                    workOrderCell.className += " custom-hide-work-order";
+                    workOrderCell.appendChild(titleDiv);
                 }
-            }
+
+                // Show timecode text, hide timecode code
+                if (items.tableOptions["showTimeCodeName"] && timeCodeCell) {
+                    let title = timeCodeCell.getAttribute("title");
+
+                    // Remove time code from string. Assumes that time codes consists of "TC" letters followed by two digits
+                    title = title.replace(/- TC[0-9]{2}$/, "");
+
+                    let titleDiv = document.createElement("div");
+                    titleDiv.innerHTML = title;
+                    titleDiv.className += " custom-timecode-name";
+
+                    timeCodeCell.className += " custom-hide-time-code";
+                    timeCodeCell.appendChild(titleDiv);
+                }
+
+                // Add styles to hour cells
+                var hourCellIndexes = getIndexes(headerRow, table.querySelectorAll('th[id*=headerreg_value]')),
+                    hourCells = table.querySelectorAll("td[onClick*='PostBack'][onClick*='reg_value'], .GridCell.SumColumn");
+
+                hourCellIndexes.forEach(function(i){
+                    var textEl = cells[i].getElementsByTagName("div")[0],
+                        text = textEl.innerText;
+
+                    if (text !== "0,00" && text !== "0.00") {
+                        textEl.className += " custom-nonzero-hours";
+                    } else {
+                        textEl.className += " custom-zero-hours";
+                    }
+                });
+            });
 
             function hideColumn(type) {
                 // Hide table head column

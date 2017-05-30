@@ -3,61 +3,150 @@
 <head>
     <title>Unit4 UX Enhancements Options</title>
     <style>
+        body {
+            position: relative;
+            padding-bottom: 50px;
+        }
+
+        p {
+            line-height: 1.4;
+        }
+
+        .input-group {
+            display: -webkit-flex;
+            display: -moz-flex;
+            display: -ms-flex;
+            display: -o-flex;
+            display: flex;
+            -webkit-flex-wrap: wrap;
+            -moz-flex-wrap: wrap;
+            -ms-flex-wrap: wrap;
+            -o-flex-wrap: wrap;
+            flex-wrap: wrap;
+        }
+
+        .input-group .input {
+            box-sizing: border-box;
+            width: 50%;
+            padding-right: 10px;
+            flex: 1 1 auto;
+        }
+
         .input {
             margin: 0 0 30px;
+            border-bottom: 1px solid whitesmoke;
         }
 
-        .input label {
+        .heading {
             font-weight: bold;
-        }
-
-        .input label::after {
-            content: "";
-            display: block;
             margin: 0 0 5px;
         }
 
         #status {
-            margin: 15px 0 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #afc836;
+            text-align: center;
+            line-height: 40px;
+        }
+
+        .save-container {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            padding: 10px;
+            background-color: whitesmoke;
+            box-shadow: 0 -20px 30px white;
         }
 
     </style>
 </head>
 <body>
     <div class="input">
-        <label for="client">Client</label>
-        <input type="text" id="client" />
-    </div>
-    <div class="input">
-        <label>Add cystom styles to tables</label>
+        <p class="heading"><label for="client">Client</label></p>
         <p>
-            <input type="checkbox" id="affectTimesheet" /> Timesheet
-        </p>
-        <p>
-            <input type="checkbox" id="affectTimesheetApproval" /> Timesheet approval
+            <input type="text" id="client" />
         </p>
     </div>
-    <div class="input">
-        <label for="preventAutomaticLogout">Prevent automatic logout</label>
-        <input type="checkbox" id="preventAutomaticLogout" /> Yes, please
+    <div class="input-group">
+        <div class="input">
+            <p class="heading">Apply styling to tables</p>
+            <p>
+                <label>
+                    <input type="checkbox" id="affectTimesheet" /> Timesheet
+                </label>
+            </p>
+            <p>
+                <label>
+                    <input type="checkbox" id="affectTimesheetApproval" /> Timesheet approval
+                </label>
+            </p>
+        </div>
+        <div class="input">
+            <p class="heading">Table style options</p>
+            <p>
+                <label>
+                    <input type="checkbox" id="showWorkOrderName" /> Show work order name
+                </label>
+            </p>
+            <p>
+                <label>
+                    <input type="checkbox" id="showTimeCodeName" /> Show time code name
+                </label>
+            </p>
+        </div>
     </div>
     <div class="input">
-        <h1>Experimental</h1>
-        <label>Hide timesheet columns</label>
+        <p class="heading" for="preventAutomaticLogout">Prevent automatic logout</p>
         <p>
-            <input type="checkbox" id="hideZoomColumn" /> Zoom
+            <label>
+                <input type="checkbox" id="preventAutomaticLogout" /> Yes, please
+            </label>
+        </p>
+    </div>
+    <h1>Experimental</h1>
+    <div class="input">
+        <p class="heading">Saving</p>
+        <p>
+            <label>
+                <input type="checkbox" id="autoSaveTimesheet" /> Auto-save (When adding, deleting or copying hours)
+            </label>
+        </p>
+        <p>
+            <label>
+                <input type="checkbox" id="autoHideSaveConfirmation" /> Auto-hide confirmation message
+            </label>
+        </p>
+    </div>
+    <div class="input">
+        <p class="heading">Hide timesheet columns</p>
+        <p>
+            <label>
+                <input type="checkbox" id="hideZoomColumn" /> Zoom
+            </label>
         </p>       
         <p>
-            <input type="checkbox" id="hideTimeCodeColumn" /> Time code
+            <label>
+                <input type="checkbox" id="hideTimeCodeColumn" /> Time code
+            </label>
         </p>       
         <p>
-            <input type="checkbox" id="hideProjectColumn" /> Project
+            <label>
+                <input type="checkbox" id="hideProjectColumn" /> Project
+            </label>
         </p>
         <p>
-            <input type="checkbox" id="hideTimeUnitColumn" /> Time unit
+            <label>
+                <input type="checkbox" id="hideTimeUnitColumn" /> Time unit
+            </label>
         </p>
     </div>
-    <button id="save">Save</button>
+    <div class="save-container">
+        <button id="save">Save</button>
+    </div>
     <div id="status"></div>
     <script src="options.js"></script>
 </body>

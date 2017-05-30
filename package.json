@@ -12,6 +12,7 @@
     "gulp-chokidar": "0.0.5",
     "gulp-clean": "^0.3.2",
     "gulp-rename": "^1.2.2",
+    "gulp-sass": "^3.1.0",
     "gulp-zip": "^4.0.0",
     "vinyl-source-stream": "^1.1.0",
     "webstore-upload": "0.0.7"

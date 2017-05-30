@@ -1,3 +1,10 @@
+## 0.1.14
+- Added option to show time code text instead of code
+- Added option to automatically save timesheet when editing
+- Added option to automatically dismiss save confirmation dialog
+- Fixed broken PM timesheet approval table
+- Tweaks to options window
+
 ## 0.1.13
 - Actually added css that should be included in 0.1.11
 
