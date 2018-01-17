@@ -1,3 +1,5 @@
+## 0.1.2
+- Updated URL to new unit4 server
 ## 0.1.14
 - Added option to show time code text instead of code
 - Added option to automatically save timesheet when editing
