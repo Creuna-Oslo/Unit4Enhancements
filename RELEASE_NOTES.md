@@ -1,4 +1,4 @@
-## 0.1.2
+## 0.2.0
 - Updated URL to new unit4 server
 ## 0.1.14
 - Added option to show time code text instead of code
