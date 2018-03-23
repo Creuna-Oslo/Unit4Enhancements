@@ -19,12 +19,8 @@ Note: This extension will only work on Creuna's Unit4 installation
 
 ## How to deploy
 
->christian.hochlin [12:43 PM]
->for å publishe til chrome webstore er det nok å legge en credentials.json-fil i root og kjøre gulp-tasken store-publish
->den må inneholde dette:
-
->christian.hochlin [12:43 PM]
->added this JavaScript/JSON snippet: Untitled 
+To publish to Chrome webstore, add a credentials.json-file to the root, and run the gulp-task store-publish.
+The file should look like this:
 
 ```
   {
