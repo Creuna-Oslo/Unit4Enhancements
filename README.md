@@ -6,14 +6,14 @@ This is a chrome plugin to enhance the UX when logging hours in Unit4
 
 **As a developer**
 
-- Download the files or clone.
-- Run `npm install`
-- Run `gulp` (This will build the extension and start atomatic building on file changes)
-- Go to chrome://extensions and drag and drop the **dist** folder.
+* Download the files or clone.
+* Run `npm install`
+* Run `gulp` (This will build the extension and start atomatic building on file changes)
+* Go to chrome://extensions and drag and drop the **dist** folder.
 
 **As a user**
 
-Get the extension from the [Chrome Webstore](https://chrome.google.com/webstore/detail/unit4-ux-enhancements/phmpdjdaaenhgojfhacckdjpomnopkoh) to install. 
+Get the extension from the [Chrome Webstore](https://chrome.google.com/webstore/detail/unit4-ux-enhancements/phmpdjdaaenhgojfhacckdjpomnopkoh) to install.
 
 Note: This extension will only work on Creuna's Unit4 installation
 
@@ -28,3 +28,16 @@ The file should look like this:
     "clientSecret": "insert client secret",
     "refreshToken": "insert refresh token"
   }
+```
+
+**Remember to bump `version` in `src/manifest.json` before attempting to publish**
+
+### How to get client Id, secret and token
+
+1.  Become a google developer: [Go here](https://chrome.google.com/webstore/developer/dashboard). You might have to pay $5 for this.
+1.  Follow [this guide](https://developer.chrome.com/webstore/using_webstore_api)
+
+## Transferring the extension to another person
+
+1.  Apply for transfer [here](https://support.google.com/chrome_webstore/contact/dev_account_transfer)
+1.  The new owner has to generate the appropriate credentials (see above).
