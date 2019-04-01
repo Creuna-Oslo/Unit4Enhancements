@@ -1,6 +1,6 @@
 {
   "name": "unit4extension",
-  "version": "1.0.0",
+  "version": "0.3.0",
   "description": "A unit4 UX extension",
   "main": "gulpfile.js",
   "dependencies": {
