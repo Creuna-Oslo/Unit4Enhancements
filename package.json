@@ -20,7 +20,7 @@
   "devDependencies": {},
   "scripts": {
     "dev": "gulp",
-    "publish": "gulp publish"
+    "pub": "gulp publish"
   },
   "repository": {
     "type": "git",
