@@ -35,13 +35,13 @@
     "css": ["styles.css"],
     "run_at": "document_end",
     "js": ["all-frames.js"],
-    "matches": ["https://csportal24.u4a.se/p470014-web/*"]
+    "matches": ["https://ubw.u4a.se/*"]
   },
   {
     "all_frames": false,
     "run_at": "document_end",
     "js": ["root.js"],
-    "matches": ["https://csportal24.u4a.se/p470014-web/*"]
+    "matches": ["https://ubw.u4a.se/*"]
   }],
   "background":
   {
