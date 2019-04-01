@@ -24,12 +24,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Arthyon/Unit4Enhancements.git"
+    "url": "git+https://github.com/Creuna-Oslo/Unit4Enhancements.git"
   },
   "author": "",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Arthyon/Unit4Enhancements/issues"
+    "url": "https://github.com/Creuna-Oslo/Unit4Enhancements/issues"
   },
-  "homepage": "https://github.com/Arthyon/Unit4Enhancements#readme"
+  "homepage": "https://github.com/Creuna-Oslo/Unit4Enhancements#readme"
 }
