@@ -6,10 +6,10 @@ This is a chrome plugin to enhance the UX when logging hours in Unit4
 
 **As a developer**
 
-* Download the files or clone.
-* Run `npm install`
-* Run `gulp` (This will build the extension and start atomatic building on file changes)
-* Go to chrome://extensions and drag and drop the **dist** folder.
+- Download the files or clone.
+- Run `npm install`
+- Run `gulp` (This will build the extension and start atomatic building on file changes)
+- Go to chrome://extensions and drag and drop the **dist** folder.
 
 **As a user**
 
@@ -24,7 +24,7 @@ The file should look like this:
 
 ```
   {
-    "clientId": "insert client id",  
+    "clientId": "insert client id",
     "clientSecret": "insert client secret",
     "refreshToken": "insert refresh token"
   }
@@ -34,8 +34,12 @@ The file should look like this:
 
 ### How to get client Id, secret and token
 
-1.  Become a google developer: [Go here](https://chrome.google.com/webstore/developer/dashboard). You might have to pay $5 for this.
-1.  Follow [this guide](https://developer.chrome.com/webstore/using_webstore_api)
+1.  Become a google developer: [Go here](https://chrome.google.com/webstore/developer/dashboard). You might have to pay \$5 for this.
+1.  Follow [this guide](https://developer.chrome.com/webstore/using_webstore_api).
+
+### Debugging
+
+1. If you see an `invalid_grant` error when trying to publish, see [this](https://blog.timekit.io/google-oauth-invalid-grant-nightmare-and-how-to-fix-it-9f4efaf1da35). If you haven't made a publish in the last 6 months, you might need to get a new `refreshToken`.
 
 ## Transferring the extension to another person
 
