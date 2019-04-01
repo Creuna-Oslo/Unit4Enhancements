@@ -1,3 +1,10 @@
+## 0.4.0
+
+- Fixes autosave not working
+- Fixes prevention of automatic logout not working
+- Fixes hiding of zoom column not working
+- Fixes table styling occasionally not working
+
 ## 0.3.0
 
 - Updated URL to new unit4 server (`ubw.u4a.se`)
