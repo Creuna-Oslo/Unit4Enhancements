@@ -90,8 +90,8 @@ gulp.task('store-publish', ['zip-files'], callback => {
         .catch(error => console.error(error));
 });
 
-gulp.task('default', ['build', 'copy', 'styles'], function() {
-    watch(['src/**/*', '!src/*.bundle.js'], ['build', 'copy', 'styles']);
+gulp.task('default', ['build', 'copy', 'styles', 'zip-files'], function() {
+    watch(['src/**/*', '!src/*.bundle.js'], ['build', 'copy', 'styles', 'zip-files']);
 });
 gulp.task('publish', ['clean', 'build', 'copy', 'styles', 'zip-files', 'store-publish']);
 
