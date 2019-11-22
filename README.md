@@ -7,8 +7,8 @@ This is a chrome plugin to enhance the UX when logging hours in Unit4
 **As a developer**
 
 - Download the files or clone.
-- Run `npm install`
-- Run `gulp` (This will build the extension and start atomatic building on file changes)
+- Run `yarn` (To install dependencies)
+- Run `yarn dev` (This will build the extension and start atomatic building on file changes)
 - Go to chrome://extensions and drag and drop the **dist** folder.
 
 **As a user**
@@ -19,7 +19,7 @@ Note: This extension will only work on Creuna's Unit4 installation
 
 ## How to deploy
 
-To publish to Chrome webstore, add a credentials.json-file to the root, and run the gulp-task store-publish.
+To publish to Chrome webstore, add a credentials.json-file to the root, and run `yarn pub`.
 The file should look like this:
 
 ```
@@ -34,14 +34,14 @@ The file should look like this:
 
 ### How to get client Id, secret and token
 
-1.  Become a google developer: [Go here](https://chrome.google.com/webstore/developer/dashboard). You might have to pay \$5 for this.
-1.  Follow [this guide](https://developer.chrome.com/webstore/using_webstore_api).
+1.  Become a google developer: Go to the [Chrome webstore developer dashboard](https://chrome.google.com/webstore/developer/dashboard). You might have to pay \$5 for this.
+1.  Follow the [webstore publish api guide](https://developer.chrome.com/webstore/using_webstore_api).
 
 ### Debugging
 
-1. If you see an `invalid_grant` error when trying to publish, see [this](https://blog.timekit.io/google-oauth-invalid-grant-nightmare-and-how-to-fix-it-9f4efaf1da35). If you haven't made a publish in the last 6 months, you might need to get a new `refreshToken`.
+1. If you see an `invalid_grant` error when trying to publish, see [this article](https://blog.timekit.io/google-oauth-invalid-grant-nightmare-and-how-to-fix-it-9f4efaf1da35). If you haven't made a publish in the last 6 months, you might need to get a new `refreshToken`.
 
 ## Transferring the extension to another person
 
-1.  Apply for transfer [here](https://support.google.com/chrome_webstore/contact/dev_account_transfer)
+1.  Apply for transfer at the [webstore dev account tranfsfer](https://support.google.com/chrome_webstore/contact/dev_account_transfer) page
 1.  The new owner has to generate the appropriate credentials (see above).
