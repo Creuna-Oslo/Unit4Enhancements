@@ -33,13 +33,13 @@
       "css": ["styles.css"],
       "run_at": "document_end",
       "js": ["all-frames.js"],
-      "matches": ["https://ubw.u4a.se/*"]
+      "matches": ["https://ubw.u4a.se/*", "https://ubw.unit4cloud.com/*"]
     },
     {
       "all_frames": false,
       "run_at": "document_end",
       "js": ["root.js"],
-      "matches": ["https://ubw.u4a.se/*"]
+      "matches": ["https://ubw.u4a.se/*", "https://ubw.unit4cloud.com/*"]
     }
   ],
   "background": {
