@@ -2,7 +2,7 @@
   "manifest_version": 2,
 
   "name": "Unit4 UX Enhancements",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "description": "Enhances the UX for Unit4",
   "options_ui": {
     "chrome_style": true,
@@ -33,13 +33,13 @@
       "css": ["styles.css"],
       "run_at": "document_end",
       "js": ["all-frames.js"],
-      "matches": ["https://ubw.u4a.se/*"]
+      "matches": ["https://ubw.u4a.se/*", "https://ubw.unit4cloud.com/*"]
     },
     {
       "all_frames": false,
       "run_at": "document_end",
       "js": ["root.js"],
-      "matches": ["https://ubw.u4a.se/*"]
+      "matches": ["https://ubw.u4a.se/*", "https://ubw.unit4cloud.com/*"]
     }
   ],
   "background": {

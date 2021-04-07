@@ -1,3 +1,6 @@
+## 0.5.0
+- Added confirmation popup for Send for approval on timesheet page
+
 ## 0.4.0
 
 - Fixes autosave not working
